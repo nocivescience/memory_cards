@@ -9,9 +9,16 @@ const answerEl=document.getElementById("answer");
 var cardEl=[];
 function createCard(data=null,index){
     const card=document.createElement('div');
+    card.classList.add("card");
     card.innerHTML=`
-        <div>${data.question}</div>
-        <div>${data.answer}</div>
+        <div class='inner-card'>
+            <div class='inner-card-front'>
+                <p>${data.question}</p>
+            </div>
+            <div class='inner-card-back'>
+                <p>${data.answer}</p>
+            </div>
+        </div>
     `;
     cardContainer.appendChild(card);
 }
