@@ -28,6 +28,11 @@ function createCard(data,index){
     cardEl.push(card);
     cardContainer.appendChild(card);
 }
+function createCards(){
+    cardData.forEach((data,index)=>{
+        createCard(data,index);
+    });
+}
 function getCardsData(){
     const cards=JSON.parse(localStorage.getItem("cards"));
     return cards===null?[]:cards;
@@ -36,6 +41,7 @@ function setCardsData(cards){
     localStorage.setItem("cards",JSON.stringify(cards));
     // window.location.reload();
 }
+createCards();
 clearBtn.addEventListener("click",()=>{
     localStorage.clear();
     location.reload();
