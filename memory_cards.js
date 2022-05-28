@@ -7,54 +7,17 @@ const addCardBtn=document.getElementById("add-card");
 const questionEl=document.getElementById("question");
 const answerEl=document.getElementById("answer");
 var cardEl=[];
-const cardData=getCardsData();
-function createCard(data,index){
-    const card=document.createElement("div");
-    card.classList.add("card");
-    if(index===0) card.classList.add("active");
+function createCard(data=null,index){
+    const card=document.createElement('div');
     card.innerHTML=`
-        <div class="inner-card">
-            <div class="inner-card-front">
-                <p>${data.question}</p>
-            </div>
-            <div class="inner-card-back">   
-                <p>${data.answer}</p>
-            </div>
-        </div>
+        <div>${data.question}</div>
+        <div>${data.answer}</div>
     `;
-    card.addEventListener("click",()=>{
-        card.classList.toggle("show-answer");
-    });
-    cardEl.push(card);
     cardContainer.appendChild(card);
 }
-function getCardsData(){
-    const cards=JSON.parse(localStorage.getItem("cards"));
-    return cards===null?[]:cards;
-}
-function setCardsData(cards){
-    localStorage.setItem("cards",JSON.stringify(cards));
-    // window.location.reload();
-}
-clearBtn.addEventListener("click",()=>{
-    localStorage.clear();
-    location.reload();
-});
-ShowBtn.addEventListener("click",()=>{
-    addContainer.classList.add("show");
-});
-hideBtn.addEventListener("click",()=>{
-    addContainer.classList.remove("show");
-});
-addCardBtn.addEventListener("click",()=>{
+addCardBtn.addEventListener("click",function(){
     const question=questionEl.value;
     const answer=answerEl.value;
-    if(question.trim()&&answer.trim()){
-        const newCard={question,answer};
-        createCard(newCard);
-        questionEl.value="";
-        answerEl.value="";
-        cardData.push(newCard);
-        setCardsData(cardData);
-    }
+    const data={question,answer};
+    createCard(data);
 });
